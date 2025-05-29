@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="12dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="4dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/yemekResim"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <TextView
+            android:id="@+id/yemekAdi"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Yemek Adı"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/yemekResim"
+            app:layout_constraintTop_toTopOf="@id/yemekResim"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="16dp" />
+
+        <TextView
+            android:id="@+id/yemekFiyat"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="₺00"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@id/yemekAdi"
+            app:layout_constraintTop_toBottomOf="@id/yemekAdi"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="4dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
