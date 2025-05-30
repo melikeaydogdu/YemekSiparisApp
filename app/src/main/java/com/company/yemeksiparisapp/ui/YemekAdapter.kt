@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.company.yemeksiparisapp.R
 import com.company.yemeksiparisapp.data.model.Yemek
 import com.company.yemeksiparisapp.databinding.YemekCardBinding
 
@@ -37,6 +38,14 @@ class YemekAdapter(private val yemekList: List<Yemek>) :
             intent.putExtra("yemek", yemek)
             holder.itemView.context.startActivity(intent)
         }
+        var isFavorite = false
+
+        b.favoriIkon.setOnClickListener {
+            isFavorite = !isFavorite
+            val iconRes = if (isFavorite) R.drawable.favorite_white else R.drawable.favorite_white
+            b.favoriIkon.setImageResource(iconRes)
+        }
+
     }
 
 
