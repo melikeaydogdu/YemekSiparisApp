@@ -13,8 +13,10 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class SepetAdapter(private var sepetList: List<SepetYemek>, function: () -> Unit) :
-    RecyclerView.Adapter<SepetAdapter.SepetViewHolder>() {
+class SepetAdapter(
+    private var sepetList: MutableList<SepetYemek>,
+    private val onSepetDegisti: () -> Unit
+) : RecyclerView.Adapter<SepetAdapter.SepetViewHolder>() {
 
     inner class SepetViewHolder(val binding: SepetCardBinding) :
         RecyclerView.ViewHolder(binding.root)
@@ -38,17 +40,24 @@ class SepetAdapter(private var sepetList: List<SepetYemek>, function: () -> Unit
 
         b.sepetSilButton.setOnClickListener {
             val context = b.root.context
+
             ApiUtils.getYemeklerDao().sepettenSil(item.sepet_yemek_id.toInt(), "melike_aydogdu")
                 .enqueue(object : Callback<SepetCevap> {
                     override fun onResponse(call: Call<SepetCevap>, response: Response<SepetCevap>) {
-                        Toast.makeText(context, "Silindi", Toast.LENGTH_SHORT).show()
+                        val yemekAdi = item.yemek_adi
+                        Toast.makeText(context, "$yemekAdi silindi", Toast.LENGTH_SHORT).show()
+
+                        sepetList.removeAt(position)
+                        notifyItemRemoved(position)
+                        notifyItemRangeChanged(position, sepetList.size)
+
+                        onSepetDegisti()
                     }
 
                     override fun onFailure(call: Call<SepetCevap>, t: Throwable) {
                         Toast.makeText(context, "Silinemedi", Toast.LENGTH_SHORT).show()
                     }
                 })
-
         }
     }
 

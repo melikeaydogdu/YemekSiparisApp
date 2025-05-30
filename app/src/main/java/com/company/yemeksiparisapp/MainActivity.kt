@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
@@ -14,6 +15,7 @@ import com.company.yemeksiparisapp.data.model.YemeklerCevap
 import com.company.yemeksiparisapp.data.repo.ApiUtils
 import com.company.yemeksiparisapp.data.retrofit.YemeklerDao
 import com.company.yemeksiparisapp.databinding.ActivityMainBinding
+import com.company.yemeksiparisapp.ui.FavorilerFragment
 import com.company.yemeksiparisapp.ui.SepetActivity
 import com.company.yemeksiparisapp.ui.YemekAdapter
 import retrofit2.Call
@@ -39,11 +41,13 @@ class MainActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     fullList = response.body()?.yemekler ?: emptyList()
                     adapter = YemekAdapter(fullList)
-                    binding.yemeklerRecyclerView.layoutManager = LinearLayoutManager(this@MainActivity)
+                    binding.yemeklerRecyclerView.layoutManager =
+                        LinearLayoutManager(this@MainActivity)
                     binding.yemeklerRecyclerView.adapter = adapter
 
 
-                    binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                    binding.searchView.setOnQueryTextListener(object :
+                        SearchView.OnQueryTextListener {
                         override fun onQueryTextSubmit(query: String?): Boolean = true
 
                         override fun onQueryTextChange(newText: String?): Boolean {
@@ -65,38 +69,50 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNav.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.nav_home -> {
-                    // Şu an zaten anasayfa
+                    binding.fragmentContainerView.visibility = View.GONE
+                    binding.yemeklerRecyclerView.visibility = View.VISIBLE
+                    binding.searchView.visibility = View.VISIBLE
                     true
                 }
+
                 R.id.nav_fav -> {
-                    Toast.makeText(this, "Favoriler (yakında)", Toast.LENGTH_SHORT).show()
+                    binding.fragmentContainerView.visibility = View.VISIBLE
+                    binding.yemeklerRecyclerView.visibility = View.GONE
+                    binding.searchView.visibility = View.GONE
+
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.fragmentContainerView, FavorilerFragment(fullList))
+                        .addToBackStack(null)
+                        .commit()
                     true
                 }
+
                 R.id.nav_cart -> {
                     startActivity(Intent(this, SepetActivity::class.java))
                     true
                 }
+
                 else -> false
             }
         }
 
-    }
 
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.main_menu, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.action_sepet -> {
-                startActivity(Intent(this, SepetActivity::class.java))
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
+        fun onCreateOptionsMenu(menu: Menu?): Boolean {
+            menuInflater.inflate(R.menu.main_menu, menu)
+            return true
         }
-    }
+
+        fun onOptionsItemSelected(item: MenuItem): Boolean {
+            return when (item.itemId) {
+                R.id.action_sepet -> {
+                    startActivity(Intent(this, SepetActivity::class.java))
+                    true
+                }
+
+                else -> super.onOptionsItemSelected(item)
+            }
+        }
 
 
-}
+    }}

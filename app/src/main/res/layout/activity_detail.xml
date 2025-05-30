@@ -2,81 +2,118 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="@android:color/white">
+
+    <ImageView
+        android:id="@+id/backButton"
+        android:layout_width="55dp"
+        android:layout_height="57dp"
+        android:contentDescription="Geri"
+        android:src="@drawable/back"
+        app:tint="@color/darker_gray"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <ImageView
+        android:id="@+id/favoriteButton"
+        android:layout_width="52dp"
+        android:layout_height="62dp"
+        android:contentDescription="Favori"
+        android:src="@drawable/favorite_white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/darker_gray" />
 
     <ImageView
         android:id="@+id/yemekResim"
         android:layout_width="0dp"
-        android:layout_height="200dp"
+        android:layout_height="220dp"
         android:scaleType="centerCrop"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/backButton"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp" />
 
     <TextView
         android:id="@+id/yemekAdi"
-        android:text="Yemek Adı"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:text="Yemek Adı"
+        android:textSize="22sp"
+        android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@id/yemekResim"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="16dp"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp" />
 
     <TextView
         android:id="@+id/yemekFiyat"
-        android:text="₺00"
-        android:textSize="20sp"
-        android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="₺35"
+        android:textSize="23sp"
+        android:textColor="@color/purple_700"
         app:layout_constraintTop_toBottomOf="@id/yemekAdi"
-        app:layout_constraintStart_toStartOf="@id/yemekAdi"
-        android:layout_marginTop="8dp"/>
-
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="8dp" />
     <LinearLayout
-        android:id="@+id/adetLayout"
+        android:id="@+id/adetContainer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
         android:layout_marginTop="24dp"
+        android:gravity="center"
+        android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@id/yemekFiyat"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
         <Button
             android:id="@+id/azaltButton"
-            android:text="-"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:text="−"
+            android:textColor="@android:color/white"
+            android:textSize="24sp"
+            android:backgroundTint="@color/purple_700" />
+
 
         <TextView
             android:id="@+id/adetText"
             android:text="1"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:textSize="20sp"
-            android:layout_width="40dp"
-            android:layout_height="wrap_content"
-            android:gravity="center" />
+            android:gravity="center"
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/arttirButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:text="+"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:textColor="@android:color/white"
+            android:textSize="24sp"
+            android:backgroundTint="@color/purple_700" />
+
     </LinearLayout>
 
     <Button
         android:id="@+id/sepeteEkleButton"
-        android:text="Sepete Ekle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/adetLayout"
+        android:text="SEPETE EKLE"
+        android:layout_marginTop="12dp"
+        android:backgroundTint="@color/purple_700"
+        android:textColor="@android:color/white"
+        app:layout_constraintTop_toBottomOf="@id/adetContainer"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="24dp"/>
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+

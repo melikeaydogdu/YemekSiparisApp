@@ -37,8 +37,9 @@ class SepetActivity : AppCompatActivity() {
                     if (response.isSuccessful) {
                         val liste = response.body()?.sepet_yemekler ?: emptyList()
                         hesaplaToplam(liste)
-                        val adapter = SepetAdapter(liste) {
-                            sepetiYukle() // silince refresh
+
+                        val adapter = SepetAdapter(liste.toMutableList()) {
+                            hesaplaToplam(liste)
                         }
                         binding.sepetRecyclerView.layoutManager = LinearLayoutManager(this@SepetActivity)
                         binding.sepetRecyclerView.adapter = adapter
@@ -51,6 +52,7 @@ class SepetActivity : AppCompatActivity() {
             })
     }
 
+
     private fun hesaplaToplam(liste: List<SepetYemek>) {
         toplamTutar = 0
         for (item in liste) {
@@ -60,4 +62,6 @@ class SepetActivity : AppCompatActivity() {
         }
         binding.toplamTutarText.text = "Toplam: ₺$toplamTutar"
     }
+
+
 }

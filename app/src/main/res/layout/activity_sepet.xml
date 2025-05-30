@@ -8,7 +8,6 @@
     android:padding="16dp"
     tools:context=".ui.SepetActivity">
 
-    <!-- Başlık -->
     <TextView
         android:id="@+id/sepetBaslik"
         android:layout_width="wrap_content"
@@ -20,7 +19,6 @@
         app:layout_constraintStart_toStartOf="parent"
         android:paddingBottom="8dp"/>
 
-    <!-- RECYCLERVIEW - Bu eksikti -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/sepetRecyclerView"
         android:layout_width="0dp"
@@ -30,7 +28,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <!-- ALT BAR -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/sepetAltBar"
         android:layout_width="0dp"
